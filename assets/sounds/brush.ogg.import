@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/brush.ogg-0c72d7b09915b8a601956c3893b54bfb.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/brush.ogg"
+dest_files=[ "res://.import/brush.ogg-0c72d7b09915b8a601956c3893b54bfb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0.0

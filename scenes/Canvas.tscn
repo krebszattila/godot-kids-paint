@@ -1,0 +1,88 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://scenes/Canvas.gd" type="Script" id=1]
+[ext_resource path="res://shaders/anti_alias.shader" type="Shader" id=2]
+[ext_resource path="res://assets/images/particles/paint_drop.png" type="Texture" id=3]
+[ext_resource path="res://shaders/circle_mask.shader" type="Shader" id=4]
+[ext_resource path="res://assets/images/particles/airbrush_smoke.png" type="Texture" id=5]
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 4 )
+shader_param/origin = Vector2( 0, 0 )
+shader_param/radius = 0.0
+
+[sub_resource type="Curve" id=4]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=7]
+max_value = 2.0
+_data = [ Vector2( 0, 0.984091 ), 0.0, 0.0, 0, 0, Vector2( 1, 2 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=8]
+colors = PoolColorArray( 1, 1, 1, 0.117647, 1, 1, 1, 0 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 2 )
+
+[node name="Canvas" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_clip_content = true
+mouse_filter = 2
+script = ExtResource( 1 )
+
+[node name="Board" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="FloodFillBoard" type="TextureRect" parent="."]
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Tween" type="Tween" parent="FloodFillBoard"]
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="PaintParticles" type="CPUParticles2D" parent="Particles"]
+emitting = false
+lifetime = 0.6
+randomness = 0.4
+local_coords = false
+texture = ExtResource( 3 )
+flag_align_y = true
+spread = 180.0
+initial_velocity = 110.09
+scale_amount_random = 0.4
+scale_amount_curve = SubResource( 4 )
+
+[node name="AirbrushParticles" type="CPUParticles2D" parent="Particles"]
+emitting = false
+amount = 16
+lifetime = 0.5
+local_coords = false
+texture = ExtResource( 5 )
+flag_align_y = true
+spread = 180.0
+gravity = Vector2( 0, 0 )
+initial_velocity = 10.0
+angular_velocity = 15.0
+angular_velocity_random = 1.0
+scale_amount_curve = SubResource( 7 )
+color_ramp = SubResource( 8 )
+
+[node name="AntiAlias" type="ColorRect" parent="."]
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="AirbrushShakeTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[connection signal="item_rect_changed" from="." to="." method="_on_rect_changed"]
+[connection signal="tween_all_completed" from="FloodFillBoard/Tween" to="." method="_on_flood_fill_tween_all_completed"]
+[connection signal="timeout" from="AirbrushShakeTimer" to="." method="_on_airbrush_shake_timer_timeout"]

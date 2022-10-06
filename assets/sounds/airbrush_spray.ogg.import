@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/airbrush_spray.ogg-0f22705922ac2d6cb3e8ebfa376e1b67.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/airbrush_spray.ogg"
+dest_files=[ "res://.import/airbrush_spray.ogg-0f22705922ac2d6cb3e8ebfa376e1b67.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0.027

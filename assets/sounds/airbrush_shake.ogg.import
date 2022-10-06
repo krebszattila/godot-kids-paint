@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/airbrush_shake.ogg-7b21fc59c7963268ad10e97a53f9f448.oggstr"
+
+[deps]
+
+source_file="res://assets/sounds/airbrush_shake.ogg"
+dest_files=[ "res://.import/airbrush_shake.ogg-7b21fc59c7963268ad10e97a53f9f448.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

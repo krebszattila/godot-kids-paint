@@ -1,0 +1,641 @@
+[gd_scene load_steps=33 format=2]
+
+[ext_resource path="res://scenes/Canvas.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Main.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/buttons/tool_pencil_color.png" type="Texture" id=3]
+[ext_resource path="res://scenes/buttons/ToolButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://assets/images/buttons/tool_pencil_base.png" type="Texture" id=5]
+[ext_resource path="res://assets/images/buttons/tool_brush_base.png" type="Texture" id=6]
+[ext_resource path="res://assets/images/buttons/tool_brush_color.png" type="Texture" id=7]
+[ext_resource path="res://assets/images/buttons/tool_bucket_base.png" type="Texture" id=8]
+[ext_resource path="res://assets/images/buttons/tool_bucket_color.png" type="Texture" id=9]
+[ext_resource path="res://assets/images/buttons/tool_airbrush_color.png" type="Texture" id=10]
+[ext_resource path="res://assets/images/buttons/tool_airbrush_base.png" type="Texture" id=11]
+[ext_resource path="res://scenes/buttons/ColorButton.tscn" type="PackedScene" id=12]
+[ext_resource path="res://assets/images/buttons/size_pencil_sm.png" type="Texture" id=13]
+[ext_resource path="res://scenes/buttons/SizeButton.tscn" type="PackedScene" id=14]
+[ext_resource path="res://assets/images/buttons/size_pencil_lg.png" type="Texture" id=15]
+[ext_resource path="res://assets/images/buttons/size_pencil_md.png" type="Texture" id=16]
+[ext_resource path="res://assets/images/buttons/size_brush_lg.png" type="Texture" id=17]
+[ext_resource path="res://assets/images/buttons/size_brush_md.png" type="Texture" id=18]
+[ext_resource path="res://assets/images/buttons/size_airbrush_lg.png" type="Texture" id=19]
+[ext_resource path="res://assets/images/buttons/size_airbrush_md.png" type="Texture" id=20]
+[ext_resource path="res://assets/images/buttons/size_airbrush_sm.png" type="Texture" id=21]
+[ext_resource path="res://assets/images/buttons/size_brush_sm.png" type="Texture" id=22]
+[ext_resource path="res://assets/images/buttons/history_redo.png" type="Texture" id=23]
+[ext_resource path="res://assets/images/buttons/history_undo.png" type="Texture" id=24]
+[ext_resource path="res://assets/images/buttons/history_undo_disabled.png" type="Texture" id=25]
+[ext_resource path="res://assets/images/buttons/history_redo_disabled.png" type="Texture" id=26]
+[ext_resource path="res://assets/images/icons/new_icon.png" type="Texture" id=27]
+[ext_resource path="res://assets/images/icons/quit_icon.png" type="Texture" id=28]
+[ext_resource path="res://assets/images/icons/save_icon.png" type="Texture" id=29]
+[ext_resource path="res://assets/images/icons/settings_icon.png" type="Texture" id=30]
+[ext_resource path="res://assets/images/icons/about_icon.png" type="Texture" id=31]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.501961 )
+corner_radius_top_left = 30
+corner_radius_top_right = 30
+corner_radius_bottom_right = 30
+corner_radius_bottom_left = 30
+
+[node name="Main" type="Node"]
+script = ExtResource( 2 )
+
+[node name="Toolbar" type="Control" parent="."]
+anchor_bottom = 1.0
+margin_right = 330.0
+mouse_filter = 1
+
+[node name="HistoryButtons" type="GridContainer" parent="Toolbar"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -77.0
+margin_top = 32.0
+margin_right = 77.0
+margin_bottom = 104.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 2
+
+[node name="UndoButton" type="TextureButton" parent="Toolbar/HistoryButtons"]
+margin_right = 72.0
+margin_bottom = 72.0
+texture_normal = ExtResource( 24 )
+texture_disabled = ExtResource( 25 )
+
+[node name="RedoButton" type="TextureButton" parent="Toolbar/HistoryButtons"]
+margin_left = 82.0
+margin_right = 154.0
+margin_bottom = 72.0
+texture_normal = ExtResource( 23 )
+texture_disabled = ExtResource( 26 )
+
+[node name="ToolButtons" type="GridContainer" parent="Toolbar"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -117.0
+margin_top = 160.0
+margin_right = 117.0
+margin_bottom = 394.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 2
+
+[node name="PencilButton" parent="Toolbar/ToolButtons" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 112.0
+margin_bottom = 112.0
+button_base_texture = ExtResource( 5 )
+button_color_texture = ExtResource( 3 )
+
+[node name="BrushButton" parent="Toolbar/ToolButtons" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 122.0
+margin_top = 0.0
+margin_right = 234.0
+margin_bottom = 112.0
+value = 1
+button_base_texture = ExtResource( 6 )
+button_color_texture = ExtResource( 7 )
+
+[node name="BucketButton" parent="Toolbar/ToolButtons" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 122.0
+margin_right = 112.0
+margin_bottom = 234.0
+value = 2
+button_base_texture = ExtResource( 8 )
+button_color_texture = ExtResource( 9 )
+
+[node name="AirbrushButton" parent="Toolbar/ToolButtons" instance=ExtResource( 4 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 122.0
+margin_top = 122.0
+margin_right = 234.0
+margin_bottom = 234.0
+value = 3
+button_base_texture = ExtResource( 11 )
+button_color_texture = ExtResource( 10 )
+
+[node name="SizeButtons" type="Control" parent="Toolbar"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -118.0
+margin_top = 440.0
+margin_right = 118.0
+margin_bottom = 512.0
+mouse_filter = 1
+
+[node name="PencilSizeButtons" type="GridContainer" parent="Toolbar/SizeButtons"]
+margin_right = 236.0
+margin_bottom = 72.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 3
+
+[node name="SizeSm" parent="Toolbar/SizeButtons/PencilSizeButtons" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 72.0
+margin_bottom = 72.0
+button_base_texture = ExtResource( 13 )
+
+[node name="SizeMd" parent="Toolbar/SizeButtons/PencilSizeButtons" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 82.0
+margin_top = 0.0
+margin_right = 154.0
+margin_bottom = 72.0
+value = 1
+button_base_texture = ExtResource( 16 )
+
+[node name="SizeLg" parent="Toolbar/SizeButtons/PencilSizeButtons" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 164.0
+margin_top = 0.0
+margin_right = 236.0
+margin_bottom = 72.0
+value = 2
+button_base_texture = ExtResource( 15 )
+
+[node name="BrushSizeButtons" type="GridContainer" parent="Toolbar/SizeButtons"]
+margin_right = 236.0
+margin_bottom = 72.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 3
+
+[node name="SizeSm" parent="Toolbar/SizeButtons/BrushSizeButtons" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 72.0
+margin_bottom = 72.0
+button_base_texture = ExtResource( 22 )
+
+[node name="SizeMd" parent="Toolbar/SizeButtons/BrushSizeButtons" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 82.0
+margin_top = 0.0
+margin_right = 154.0
+margin_bottom = 72.0
+value = 1
+button_base_texture = ExtResource( 18 )
+
+[node name="SizeLg" parent="Toolbar/SizeButtons/BrushSizeButtons" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 164.0
+margin_top = 0.0
+margin_right = 236.0
+margin_bottom = 72.0
+value = 2
+button_base_texture = ExtResource( 17 )
+
+[node name="AirbrushSizeButtons" type="GridContainer" parent="Toolbar/SizeButtons"]
+margin_right = 236.0
+margin_bottom = 72.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 3
+
+[node name="SizeSm" parent="Toolbar/SizeButtons/AirbrushSizeButtons" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 72.0
+margin_bottom = 72.0
+button_base_texture = ExtResource( 21 )
+
+[node name="SizeMd" parent="Toolbar/SizeButtons/AirbrushSizeButtons" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 82.0
+margin_top = 0.0
+margin_right = 154.0
+margin_bottom = 72.0
+value = 1
+button_base_texture = ExtResource( 20 )
+
+[node name="SizeLg" parent="Toolbar/SizeButtons/AirbrushSizeButtons" instance=ExtResource( 14 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 164.0
+margin_top = 0.0
+margin_right = 236.0
+margin_bottom = 72.0
+value = 2
+button_base_texture = ExtResource( 19 )
+
+[node name="ColorButtons" type="GridContainer" parent="Toolbar"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -142.0
+margin_top = 592.0
+margin_right = 142.0
+margin_bottom = 974.0
+custom_constants/vseparation = 10
+custom_constants/hseparation = 10
+columns = 3
+
+[node name="BlackButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 88.0
+margin_bottom = 88.0
+
+[node name="GrayButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 98.0
+margin_top = 0.0
+margin_right = 186.0
+margin_bottom = 88.0
+value = 2
+
+[node name="WhiteButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 196.0
+margin_top = 0.0
+margin_right = 284.0
+margin_bottom = 88.0
+value = 1
+
+[node name="BrownButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 98.0
+margin_right = 88.0
+margin_bottom = 186.0
+value = 3
+
+[node name="RedButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 98.0
+margin_top = 98.0
+margin_right = 186.0
+margin_bottom = 186.0
+value = 4
+
+[node name="OrangeButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 196.0
+margin_top = 98.0
+margin_right = 284.0
+margin_bottom = 186.0
+value = 5
+
+[node name="CyanButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 196.0
+margin_right = 88.0
+margin_bottom = 284.0
+value = 9
+
+[node name="GreenButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 98.0
+margin_top = 196.0
+margin_right = 186.0
+margin_bottom = 284.0
+value = 6
+
+[node name="YellowButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 196.0
+margin_top = 196.0
+margin_right = 284.0
+margin_bottom = 284.0
+value = 7
+
+[node name="BlueButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 0.0
+margin_top = 294.0
+margin_right = 88.0
+margin_bottom = 382.0
+value = 8
+
+[node name="PurpleButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 98.0
+margin_top = 294.0
+margin_right = 186.0
+margin_bottom = 382.0
+value = 10
+
+[node name="PinkButton" parent="Toolbar/ColorButtons" instance=ExtResource( 12 )]
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 196.0
+margin_top = 294.0
+margin_right = 284.0
+margin_bottom = 382.0
+value = 11
+
+[node name="Canvas" parent="." instance=ExtResource( 1 )]
+margin_left = 330.0
+margin_top = 20.0
+margin_right = -20.0
+margin_bottom = -20.0
+
+[node name="Menu" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+
+[node name="ColorRect" type="ColorRect" parent="Menu"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.72549 )
+
+[node name="AboutText" type="RichTextLabel" parent="Menu"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 300.0
+margin_top = 60.0
+margin_right = -300.0
+margin_bottom = -60.0
+bbcode_enabled = true
+bbcode_text = "Created with the awesome [url=https://godotengine.org/]Godot Game Engine[/url].
+
+Sounds used:
+[indent]
+* [url=https://freesound.org/people/cbakos/sounds/200377/]Spray Paint Shake Seven.wav[/url] by [url=https://freesound.org/people/cbakos/]cbakos[/url] under [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 License[/url]
+* [url=https://freesound.org/people/djwhity/sounds/249715/]Pencil_on_paper_line.aif[/url] by [url=https://freesound.org/people/djwhity/]djwhity[/url] under [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 License[/url]
+* [url=https://freesound.org/people/richwise/sounds/476839/]spray can[/url] by [url=https://freesound.org/people/richwise/]richwise[/url] under [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 License[/url]
+* [url=https://freesound.org/people/paulfabb/sounds/577866/]Paint 1.wav[/url] by [url=https://freesound.org/people/paulfabb/]paulfabb[/url] under [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 License[/url]
+* [url=https://freesound.org/people/StephenSaldanha/sounds/158759/]Slime Movement[/url] by [url=https://freesound.org/people/StephenSaldanha/]StephenSaldanha[/url] under [url=https://creativecommons.org/licenses/by/3.0/]CC BY 3.0 License[/url]
+* [url=https://freesound.org/people/GameAudio/sounds/220197/]Click - Basic[/url] by [url=https://freesound.org/people/GameAudio/]GameAudio[/url] under [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 License[/url]
+[/indent]
+
+Textures used:
+[indent]
+* [url=https://opengameart.org/content/smoke-vapor-particles]Smoke Vapor Particles[/url] by [url=https://opengameart.org/users/fupi]Fupi[/url] under [url=https://creativecommons.org/publicdomain/zero/1.0/]CC0 1.0 License[/url]
+[/indent]
+
+Code samples used:
+[indent]
+* [url=https://godotengine.org/asset-library/asset/517]2D GD Paint Demo[/url] by [url=https://godotengine.org/]Godot Engine[/url]
+* [url=http://zylannprods.fr/dl/godot/ChalkBoard.zip]ChalkBoard[/url] by [url=https://twitter.com/ZylannMP3]@ZylannMP3[/url]
+* [url=https://github.com/erich666/GraphicsGems/blob/master/gems/SeedFill.c]A Seed Fill Algorithm[/url] by [url=https://www.cs.cmu.edu/~ph/]Paul Heckbert[/url]
+* [url=https://blog.demofox.org/2015/04/23/flipquad-fliptri-antialiasing/]\"FlipTri\" anti-aliasing[/url] by [url=https://twitter.com/Atrix256]@Atrix256[/url]
+[/indent]
+
+License:
+
+The app is released under the [url=https://www.gnu.org/licenses/gpl-3.0.html]GNU General Public License Version 3[/url]
+
+This app uses Godot Engine, available under the following license:
+
+Copyright (c) 2007-2022 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2022 Godot Engine contributors.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"
+text = "Created with the awesome Godot Game Engine.
+
+Sounds used:
+	
+* Spray Paint Shake Seven.wav by cbakos under CC0 1.0 License
+* Pencil_on_paper_line.aif by djwhity under CC0 1.0 License
+* spray can by richwise under CC0 1.0 License
+* Paint 1.wav by paulfabb under CC0 1.0 License
+* Slime Movement by StephenSaldanha under CC BY 3.0 License
+* Click - Basic by GameAudio under CC0 1.0 License
+
+
+Textures used:
+	
+* Smoke Vapor Particles by Fupi under CC0 1.0 License
+
+
+Code samples used:
+	
+* 2D GD Paint Demo by Godot Engine
+* ChalkBoard by @ZylannMP3
+* A Seed Fill Algorithm by Paul Heckbert
+* \"FlipTri\" anti-aliasing by @Atrix256
+
+
+License:
+
+The app is released under the GNU General Public License Version 3
+
+This app uses Godot Engine, available under the following license:
+
+Copyright (c) 2007-2022 Juan Linietsky, Ariel Manzur. Copyright (c) 2014-2022 Godot Engine contributors.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \"Software\"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+"
+
+[node name="SettingsButtons" type="VBoxContainer" parent="Menu"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -87.5
+margin_top = -86.0
+margin_right = 87.5
+margin_bottom = 86.0
+
+[node name="SoundsCheck" type="CheckButton" parent="Menu/SettingsButtons"]
+margin_right = 175.0
+margin_bottom = 40.0
+text = "Sounds"
+
+[node name="ParticlesCheck" type="CheckButton" parent="Menu/SettingsButtons"]
+margin_top = 44.0
+margin_right = 175.0
+margin_bottom = 84.0
+text = "Particle effects"
+
+[node name="AntialiasingCheck" type="CheckButton" parent="Menu/SettingsButtons"]
+margin_top = 88.0
+margin_right = 175.0
+margin_bottom = 128.0
+text = "Anti-aliasing"
+
+[node name="FullscreenCheck" type="CheckButton" parent="Menu/SettingsButtons"]
+margin_top = 132.0
+margin_right = 175.0
+margin_bottom = 172.0
+text = "Fullscreen"
+
+[node name="MenuButtons" type="HBoxContainer" parent="Menu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -480.0
+margin_top = -80.0
+margin_right = 480.0
+margin_bottom = 80.0
+custom_constants/separation = 40
+alignment = 1
+
+[node name="NewButton" type="TextureButton" parent="Menu/MenuButtons"]
+margin_right = 160.0
+margin_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource( 27 )
+
+[node name="SaveButton" type="TextureButton" parent="Menu/MenuButtons"]
+margin_left = 200.0
+margin_right = 360.0
+margin_bottom = 160.0
+texture_normal = ExtResource( 29 )
+
+[node name="SettingsButton" type="TextureButton" parent="Menu/MenuButtons"]
+margin_left = 400.0
+margin_right = 560.0
+margin_bottom = 160.0
+texture_normal = ExtResource( 30 )
+
+[node name="AboutButton" type="TextureButton" parent="Menu/MenuButtons"]
+margin_left = 600.0
+margin_right = 760.0
+margin_bottom = 160.0
+texture_normal = ExtResource( 31 )
+
+[node name="QuitButton" type="TextureButton" parent="Menu/MenuButtons"]
+margin_left = 800.0
+margin_right = 960.0
+margin_bottom = 160.0
+texture_normal = ExtResource( 28 )
+
+[node name="MenuHelpPopup" type="Panel" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -160.0
+margin_top = 40.0
+margin_right = 160.0
+margin_bottom = 100.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+
+[node name="Label" type="Label" parent="MenuHelpPopup"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Press the ESC key to open the menu"
+align = 1
+valign = 1
+
+[node name="Timer" type="Timer" parent="MenuHelpPopup"]
+wait_time = 1.5
+
+[node name="FileDialog" type="FileDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -348.0
+margin_top = -168.5
+margin_right = 348.0
+margin_bottom = 168.5
+access = 2
+filters = PoolStringArray( "*.png ; PNG" )
+
+[connection signal="pressed" from="Toolbar/HistoryButtons/UndoButton" to="." method="_on_undo_button_pressed"]
+[connection signal="pressed" from="Toolbar/HistoryButtons/RedoButton" to="." method="_on_redo_button_pressed"]
+[connection signal="history_changed" from="Canvas" to="." method="_on_canvas_history_changed"]
+[connection signal="toggled" from="Menu/SettingsButtons/SoundsCheck" to="." method="_on_settings_sounds_toggled"]
+[connection signal="toggled" from="Menu/SettingsButtons/ParticlesCheck" to="." method="_on_settings_particles_toggled"]
+[connection signal="toggled" from="Menu/SettingsButtons/AntialiasingCheck" to="." method="_on_settings_antialiasing_toggled"]
+[connection signal="toggled" from="Menu/SettingsButtons/FullscreenCheck" to="." method="_on_settings_fullscreen_toggled"]
+[connection signal="pressed" from="Menu/MenuButtons/NewButton" to="." method="_on_new_button_pressed"]
+[connection signal="pressed" from="Menu/MenuButtons/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="Menu/MenuButtons/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="Menu/MenuButtons/AboutButton" to="." method="_on_about_button_pressed"]
+[connection signal="pressed" from="Menu/MenuButtons/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="timeout" from="MenuHelpPopup/Timer" to="." method="_on_menu_help_popup_timer_timeout"]
+[connection signal="file_selected" from="FileDialog" to="." method="_save_image"]
